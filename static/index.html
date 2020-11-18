@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IA 2020 - Actividad Práctica B3</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Font Awesome -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"></link>
+
+</head>
+<body>
+  <h1>Validación de modelos - Análisis ROC</h1>
+  <div class="main-container">
+    <h2>Datos del problema</h2>
+    <div class="main-container__problem-data">
+      <div class="main-container__problem-data-table">
+        <span class="main-container__problem-data-table-title">Resultados de la clasificación de Piezas con filtrados "A" y "B"</span>
+        <div class="main-container__problem-data-table-container">
+          <img class="data-table-image" src="images/tabla-resultados-clasificacion-modelos-a-y-b.png" alt="" />
+        </div>
+        <span class="main-container__problem-data-table-footer">
+          Referencia: <br><br>
+          (-) Cantidad de piezas buenas con cada nivel de gris
+          (+) Cantidad de piezas con fallas o defectuosas
+        </span>
+      </div>
+    </div>
+    <h2>Solución del problema</h2>
+    <div class="main-container__solution">
+      <div class="main-container__solution-distrib-curves-and-conting-tables-container">
+        <p>Curvas de distribución y tablas de contingencia</p>
+        <div class="main-container__solution-distrib-curves-and-conting-tables-item">
+          <span>Modelo "A"</span>
+          <div id="model-A-distrib-curve" class="main-container__solution-model-distrib-curve">
+          </div>
+          <div id="model-A-conting-table-part-1" class="main-container__solution-model-conting-table">
+            <div class="model-conting-table__item-row">
+              <div class="model-conting-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">VP</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">FN</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">FP</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">VN</div>
+            </div>
+          </div>
+          <div id="model-A-conting-table-part-2" class="main-container__solution-model-conting-table">
+            <div class="model-conting-table__item-row">
+              <div class="model-conting-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">VP</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">FN</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">FP</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">VN</div>
+            </div>
+          </div>
+        </div>
+        <div class="main-container__solution-distrib-curves-and-conting-tables-item">
+          <span>Modelo "B"</span>
+          <div id="model-B-distrib-curve" class="main-container__solution-model-distrib-curve">
+          </div>
+          <div id="model-B-conting-table-part-1" class="main-container__solution-model-conting-table">
+            <div class="model-conting-table__item-row">
+              <div class="model-conting-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">VP</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">FN</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">FP</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">VN</div>
+            </div>
+          </div>
+          <div id="model-B-conting-table-part-2" class="main-container__solution-model-conting-table">
+            <div class="model-conting-table__item-row">
+              <div class="model-conting-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">VP</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">FN</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">FP</div>
+              <div class="model-conting-table__item-column column-header column-flex-1">VN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-container__solution-roc-curves-and-tables-container">
+        <p>Curvas ROC</p>
+        <div class="main-container__solution-roc-curves-and-tables-item">
+          <span>Modelo "A"</span>
+          <div id="model-A-roc-curve" class="main-container__solution-model-roc-curve">
+          </div>
+          <div id="model-A-roc-table-part-1" class="main-container__solution-model-roc-table">
+            <div class="model-roc-table__item-row">
+              <div class="model-roc-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FFP</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FVN</div>
+            </div>
+          </div>
+          <div id="model-A-roc-table-part-2" class="main-container__solution-model-roc-table">
+            <div class="model-roc-table__item-row">
+              <div class="model-roc-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FFP</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FVN</div>
+            </div>
+          </div>
+        </div>
+        <div class="main-container__solution-roc-curves-and-tables-item">
+          <span>Modelo "B"</span>
+          <div id="model-B-roc-curve" class="main-container__solution-model-roc-curve">
+          </div>
+          <div id="model-B-roc-table-part-1" class="main-container__solution-model-roc-table">
+            <div class="model-roc-table__item-row">
+              <div class="model-roc-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FFP</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FVN</div>
+            </div>
+          </div>
+          <div id="model-B-roc-table-part-2" class="main-container__solution-model-roc-table">
+            <div class="model-roc-table__item-row">
+              <div class="model-roc-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FFP</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-roc-table__item-column column-header column-flex-1">FVN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-container__solution-youden-curves-and-tables-container">
+        <p>Análisis Youden</p>
+        <div class="main-container__solution-youden-curves-and-tables-item">
+          <span>Modelo "A"</span>
+          <div id="model-A-youden-curve" class="main-container__solution-model-youden-curve">
+          </div>
+          <div id="model-A-youden-table-part-1" class="main-container__solution-model-youden-table">
+            <div class="model-youden-table__item-row">
+              <div class="model-youden-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FFP</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FVN</div>
+            </div>
+          </div>
+          <div id="model-A-youden-table-part-2" class="main-container__solution-model-youden-table">
+            <div class="model-youden-table__item-row">
+              <div class="model-youden-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FFP</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FVN</div>
+            </div>
+          </div>
+        </div>
+        <div class="main-container__solution-youden-curves-and-tables-item">
+          <span>Modelo "B"</span>
+          <div id="model-B-youden-curve" class="main-container__solution-model-youden-curve">
+          </div>
+          <div id="model-B-youden-table-part-1" class="main-container__solution-model-youden-table">
+            <div class="model-youden-table__item-row">
+              <div class="model-youden-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FFP</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FVN</div>
+            </div>
+          </div>
+          <div id="model-B-youden-table-part-2" class="main-container__solution-model-youden-table">
+            <div class="model-youden-table__item-row">
+              <div class="model-youden-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FFP</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-youden-table__item-column column-header column-flex-1">FVN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-container__solution-accuracy-curves-and-tables-container">
+        <p>Curvas de exactitud</p>
+        <div class="main-container__solution-accuracy-curves-and-tables-item">
+          <span>Modelo "A"</span>
+          <div id="model-A-accuracy-curve" class="main-container__solution-model-accuracy-curve">
+          </div>
+          <div id="model-A-accuracy-table-part-1" class="main-container__solution-model-accuracy-table">
+            <div class="model-accuracy-table__item-row">
+              <div class="model-accuracy-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-accuracy-table__item-column column-header column-flex-1">Exact.</div>
+            </div>
+          </div>
+          <div id="model-A-accuracy-table-part-2" class="main-container__solution-model-accuracy-table">
+            <div class="model-accuracy-table__item-row">
+              <div class="model-accuracy-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-accuracy-table__item-column column-header column-flex-1">Exact.</div>
+            </div>
+          </div>
+        </div>
+        <div class="main-container__solution-accuracy-curves-and-tables-item">
+          <span>Modelo "B"</span>
+          <div id="model-B-accuracy-curve" class="main-container__solution-model-accuracy-curve">
+          </div>
+          <div id="model-B-accuracy-table-part-1" class="main-container__solution-model-accuracy-table">
+            <div class="model-accuracy-table__item-row">
+              <div class="model-accuracy-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-accuracy-table__item-column column-header column-flex-1">Exact.</div>
+            </div>
+          </div>
+          <div id="model-B-accuracy-table-part-2" class="main-container__solution-model-accuracy-table">
+            <div class="model-accuracy-table__item-row">
+              <div class="model-accuracy-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-accuracy-table__item-column column-header column-flex-1">Exact.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-container__solution-pr-curves-and-tables-container">
+        <p>Curvas PR</p>
+        <div class="main-container__solution-pr-curves-and-tables-item">
+          <span>Modelo "A"</span>
+          <div id="model-A-pr-curve" class="main-container__solution-model-pr-curve">
+          </div>
+          <div id="model-A-pr-table-part-1" class="main-container__solution-model-pr-table">
+            <div class="model-pr-table__item-row">
+              <div class="model-pr-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-pr-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-pr-table__item-column column-header column-flex-1">Prec.</div>
+            </div>
+          </div>
+          <div id="model-A-pr-table-part-2" class="main-container__solution-model-pr-table">
+            <div class="model-pr-table__item-row">
+              <div class="model-pr-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-pr-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-pr-table__item-column column-header column-flex-1">Prec.</div>
+            </div>
+          </div>
+        </div>
+        <div class="main-container__solution-pr-curves-and-tables-item">
+          <span>Modelo "B"</span>
+          <div id="model-B-pr-curve" class="main-container__solution-model-pr-curve">
+          </div>
+          <div id="model-B-pr-table-part-1" class="main-container__solution-model-pr-table">
+            <div class="model-pr-table__item-row">
+              <div class="model-pr-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-pr-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-pr-table__item-column column-header column-flex-1">Prec.</div>
+            </div>
+          </div>
+          <div id="model-B-pr-table-part-2" class="main-container__solution-model-pr-table">
+            <div class="model-pr-table__item-row">
+              <div class="model-pr-table__item-column column-header column-flex-1">Indic.</div>
+              <div class="model-pr-table__item-column column-header column-flex-1">FVP</div>
+              <div class="model-pr-table__item-column column-header column-flex-1">Prec.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-container__solution-results-comparison-table-container">
+        <p>Comparación de resultados</p>
+        <div id="solution-results-comparison-table" class="main-container__solution-results-comparison-table">
+          <div class="solution-results-comparison-table__item-row row-header">
+            <div class="solution-results-comparison-table__item-column column-header column-flex-1 pt-2 pr-1 pb-2 pl-1"><strong>Indicadores evaluados</strong></div>
+            <div class="solution-results-comparison-table__item-column column-header column-flex-2 pt-2 pb-2"><strong>Modelos comparados</strong></div>
+          </div>
+          <div class="solution-results-comparison-table__item-row row-header">
+            <div class="solution-results-comparison-table__item-column column-header column-flex-1 pt-2 pr-1 pb-2 pl-1"></div>
+            <div class="solution-results-comparison-table__item-row row-header row-flex-2">
+              <div class="solution-results-comparison-table__item-column column-header column-flex-1 pt-2 pb-2"><strong>A</strong></div>
+              <div class="solution-results-comparison-table__item-column column-header column-flex-1 pt-2 pb-2"><strong>B</strong></div>
+            </div>
+          </div>
+
+          <div class="solution-results-comparison-table__item-row">
+            <div class="solution-results-comparison-table__item-column column-flex-1 pt-2 pr-1 pb-2 pl-1"><strong>Máxima exactitud del modelo</strong></div>
+            <div class="solution-results-comparison-table__item-row row-flex-2">
+              <div id="model-A-max-accuracy-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+              <div id="model-B-max-accuracy-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+            </div>
+          </div>
+          <div class="solution-results-comparison-table__item-row">
+            <div class="solution-results-comparison-table__item-column column-flex-1 pt-2 pr-1 pb-2 pl-1"><strong>Posición del valor de corte en que la máxima exactitud del modelo es alcanzada</strong></div>
+            <div class="solution-results-comparison-table__item-row row-flex-2">
+              <div id="model-A-max-accuracy-vc-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+              <div id="model-B-max-accuracy-vc-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+            </div>
+          </div>
+          <div class="solution-results-comparison-table__item-row">
+            <div class="solution-results-comparison-table__item-column column-flex-1 pt-2 pr-1 pb-2 pl-1"><strong>Área bajo la curva ROC</strong></div>
+            <div class="solution-results-comparison-table__item-row row-flex-2">
+              <div id="model-A-auc-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+              <div id="model-B-auc-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+            </div>
+          </div>
+          <div class="solution-results-comparison-table__item-row">
+            <div class="solution-results-comparison-table__item-column column-flex-1 pt-2 pr-1 pb-2 pl-1"><strong>Coeficiente de Gini</strong></div>
+            <div class="solution-results-comparison-table__item-row row-flex-2">
+              <div id="model-A-gini-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+              <div id="model-B-gini-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+            </div>
+          </div>
+          <div class="solution-results-comparison-table__item-row">
+            <div class="solution-results-comparison-table__item-column column-flex-1 pt-2 pr-1 pb-2 pl-1"><strong>Mejor índice de Youden</strong></div>
+            <div class="solution-results-comparison-table__item-row row-flex-2">
+              <div id="model-A-max-youden-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+              <div id="model-B-max-youden-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+            </div>
+          </div>
+          <div class="solution-results-comparison-table__item-row">
+            <div class="solution-results-comparison-table__item-column column-flex-1 pt-2 pr-1 pb-2 pl-1"><strong>Valor de corte del mejor índice de Youden</strong></div>
+            <div class="solution-results-comparison-table__item-row row-flex-2">
+              <div id="model-A-max-youden-vc-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+              <div id="model-B-max-youden-vc-value" class="solution-results-comparison-table__item-column column-flex-1 pt-2 pb-2 solution-results-comparison-table-value"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="index.js" type="module"></script>
+</body>
+</html>

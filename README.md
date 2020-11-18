@@ -2,11 +2,11 @@
 
 Repositorio con el código de la solución de la Actividad Práctica B3 de la materia Inteligencia Artificial 2020.
 
-#### Objetivo: 
+#### Objetivo:
 
-- Utilizando un analisis ROC, comparar la capacidad que se obtiene utilizando dos procedimientos diferentes “A” y “B” de filtrado de imágenes, para clasificar y detectar fallas en piezas de fundición de aluminio a partir de su nivel de gris.
+- Utilizando un analisis ROC, comparar la capacidad que se obtiene utilizando dos procedimientos diferentes “A” y “B” de filtrado de imágenes, para clasificar y detectar fallas en piezas de fundición de aluminio a partir de su nivel de gris
 
-- Identificar el modelo que brinde la mayor capacidad de clasificaciónUtilizando un analisis ROC, comparar la capacidad que se obtiene utilizando dos procedimientos diferentes “A” y “B” de filtrado de  imágenes, para clasificar y detectar fallas en piezas de fundición de aluminio a partir de su nivel de gris.
+- Identificar el modelo que brinde la mayor capacidad de clasificación
 
 #### Alumno: Ivan Gabriel Guerra.
 #### Profesor: Juan Francisco Giró.

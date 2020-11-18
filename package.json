@@ -1,22 +1,22 @@
 {
-  "name": "estimacion-desempenio-sistema",
+  "name": "validacion-modelos",
   "version": "1.0.0",
-  "description": "Repositorio con el código de la solución de la Actividad Práctica B2 de la materia Inteligencia Artificial 2020.",
+  "description": "Repositorio con el código de la solución de la Actividad Práctica B3 de la materia Inteligencia Artificial 2020.",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iguerra94/SystemPerformanceEstimation.git"
+    "url": "git+https://github.com/iguerra94/ModelValidation.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/iguerra94/SystemPerformanceEstimation/issues"
+    "url": "https://github.com/iguerra94/ModelValidation/issues"
   },
-  "homepage": "https://github.com/iguerra94/SystemPerformanceEstimation#readme",
+  "homepage": "https://github.com/iguerra94/ModelValidation#readme",
   "dependencies": {
     "express": "^4.17.1"
   }
